@@ -2,8 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv').config();
 
-mongoose.connect('mongodb://localhost/myblog', { useNewUrlParser: true } );
+
+mongoose.connect(`mongodb://${process.env.ML_USER}:${process.env.ML_PW}@ds229648.mlab.com:29648/heroku_53wqxxpm`, { useNewUrlParser: true } );
 mongoose.Promise = Promise;
 
 const app = express();
