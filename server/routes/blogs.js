@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         .catch(err => {
             res.status(404).send('Not able to retrieve the Blogs.')
             console.log(err);
-            
+
         });
 });
 
@@ -56,8 +56,8 @@ router.put('/:id', (req, res) => {
     .then(blog => {
         if(blog){res.status(204).json(blog)
             console.log('blog updated!');
-        } else { res.status(404).send('Unable to update the blog.')}
-    });
+        }
+    }).catch(res.status(404).send('Unable to update the blog.'))
 });
 
 router.delete('/:id', (req, res) => {
@@ -67,8 +67,9 @@ router.delete('/:id', (req, res) => {
             if(blog) {
                 res.status(200).json(blog);
                 console.log(`Successfully deleted ${blog}`)
-            }else{ res.status(500).send('Cannot delete the blog.')}
-        });
+            }
+        })
+        .catch( res.status(500).send('Cannot delete the blog.') )
 })
 
 module.exports = router;

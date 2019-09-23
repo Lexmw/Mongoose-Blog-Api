@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
         .find()
         .then(users => {
             res.status(200).json(users);
-        });
+        })
+        .catch(res.status(404).send('Users cannot be retrieved.'))
 });
 
 router.get('/:id', (req, res)=> {
@@ -16,10 +17,9 @@ router.get('/:id', (req, res)=> {
         .then(user => {
             if(user){ res.status(200).json(user)
             console.log(`I found the user ${user}`);
-            }else {
-                res.status(404).send('This user was not found.')
             }
-        }); 
+        })
+        .catch(res.status(404).send('This user was not found.'))
 });
 
 router.post('/', (req, res) => {
@@ -39,8 +39,9 @@ router.put('/:id', (req, res) => {
         .then(user => {
             if(user){res.status(204).json(user)
                 console.log('User updated!');
-            } else { res.status(404).send('Unable to update the user.')}
-    });
+            }
+    })
+    .catch(res.status(404).send('Unable to update the user.'))
 });
 
 router.delete('/:id', (req, res) => {
@@ -50,8 +51,9 @@ router.delete('/:id', (req, res) => {
             if(user) {
                 res.status(200).json(user);
                 console.log(`Successfully deleted ${user}`)
-            }else{ res.status(500).send('Cannot delete the user.')}
-        });
+            }
+        })
+        .catch(res.status(500).send('Cannot delete the user.'))
 })
 
 module.exports = router;
