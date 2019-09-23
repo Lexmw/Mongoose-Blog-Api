@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
         .catch(err => {
             res.status(404).send('Not able to retrieve the Blogs.')
             console.log(err);
+            
         });
 });
 
